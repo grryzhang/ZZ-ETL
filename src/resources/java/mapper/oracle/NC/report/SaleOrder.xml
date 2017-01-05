@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zhongzhou.Excavator.DAO.oracle.NC.report.SaleOrderDAO">  
+
+	<resultMap type="com.zhongzhou.Excavator.model.NC.report.SaleOrderState" id="ncReportSaleOrderStateMap">
+    	<result property="customerOrderId"              column="customerOrderId"            />
+    	<result property="orderId"              		column="orderId"            		/>
+    	<result property="orderTime"              		column="orderTime"            		/>   
+    	<result property="customerName"              	column="customerName"            	/>   
+    	<result property="customerBuyer"              	column="customerBuyer"            	/>   
+    	<result property="tradeTerm"              		column="tradeTerm"            		/>   
+    	<result property="businessUser"             	column="businessUser"            	/>   
+
+    	<collection property="items" ofType="com.zhongzhou.Excavator.model.NC.report.SaleOrderItemState" javaType="list">
+    		<id     property="code"                  		column="itemCode"/>
+    		<result property="customerOrderId"              column="customerOrderId"            />
+    		<result property="orderId"              		column="orderId"            		/>
+    		<result property="type"              			column="itemType"            		/>
+    		<result property="name"              			column="itemName"            		/>
+    		<result property="specification"              	column="itemSpecification"          />
+    		
+    		<result property="totalNumber"              	column="totalNumber"                />
+    		<result property="unit"              			column="unit"                       />
+    		<result property="unitPrice"              	    column="unitPrice"                  />
+    		<result property="totalPrice"              		column="totalPrice"                 />
+    		
+    		
+    		<result property="forecastDeliveryTime"         column="forecastDeliveryTime"       />   
+    		<result property="deliveryTime"              	column="deliveryTime"            	/>   
+    		<result property="productionEndTime"            column="productionEndTime"          />   
+    		
+    		<result property="inspection"              		column="inspection"            		/>   
+    		<result property="inspectionDate"               column="inspectionDate"             />
+    	</collection>         
+    </resultMap> 
+    
+    <select id="selectSaleOrderStates"
+    		resultMap="ncReportSaleOrderStateMap">
+		SELECT 
+			unitshortname,
+			vreceiptcode as orderId,
+			vdef1 as customerOrderId,
+			CUSTSHORTNAME as customerName, 
+			psnname,
+			psnEngName as businessUser,
+			USER_NAME,
+			dmakedate,
+			dbilldate as orderTime,
+			extract(year from(to_date(dbilldate,'yyyy-mm-dd'))) as dbillyear,
+			extract(month from(to_date(dbilldate,'yyyy-mm-dd'))) as dbillmonth,
+			fstatus,
+			vdef2,
+			vdef3,
+			vdef4 as forecastDeliveryTime,
+			vdef7 as tradeTerm,
+			vnote,
+			currtypename,
+			invcode as itemCode,
+			invtype as itemType,
+			invname,
+			forinvname as itemName,
+			invspec as itemSpecification,
+			MEASNAME as unit,
+			nnumber as totalNumber,
+			noriginalcurtaxprice as unitPrice,
+			noriginalcursummny as totalPrice,
+			ntaxrate,
+			advdef4,
+			dconsigndate,
+			frownote,
+			ntotalreceivenumber,
+			ntotalinventorynumber,
+			ntotalinvoicenumber,
+			dapprovedate,
+			factShortName,
+			contractNo,
+			dorderdate,
+			cgpsnname,
+			cgUsername,
+			termname,
+			nprepaymny,
+			cgvmemo,
+			cgCurrtypeName,
+			cgNorderNum,
+			cgNorgTaxPrice,
+			cgnoriginaltaxpricemny,
+			cgntaxrate,
+			cgdplanarrvdate as deliveryTime,
+			cgaavmemo,
+			naccumarrvnum,
+			naccumstorenum,
+			naccuminvoicenum,
+			floor(to_date(dmakedate,'yyyy-mm-dd')-to_date(dbilldate,'yyyy-mm-dd')) as XiadanDay,
+			vdef11 as customerBuyer,
+			factEngName,
+			NVL(naccumstorenum,0)-NVL(ntotalinventorynumber,0) as stockQty,
+			NVL(naccumarrvnum,0)-NVL(ntotalreceivenumber,0) as forcastStockQty,
+			cdeliveraddress,
+			bsquareendflag,
+			dhusername,
+			dreceivedate as productionEndTime,
+			rkUserName,
+			rkBillDate as inspectionDate,
+			qcResult as inspection,
+			salesTermName
+		FROM 
+			(  
+				SELECT 
+				    aa.corder_bid AS a1,
+				    e.unitshortname,
+				    a.vreceiptcode,
+				    a.vdef1,
+				    a.vdef11,
+				    dd.CUSTSHORTNAME,
+				    b.psnname,
+				    bb.usedname as psnEngName,
+				    c.USER_NAME,
+				    a.dmakedate,
+				    a.dbilldate,
+				    a.fstatus,
+				    a.vdef2,
+				    a.vdef3,
+				    a.vdef4,
+				    a.vdef7,
+				    a.vnote,
+				    f.termname as salesTermName,
+				    ae.currtypename,
+				    aa.crowno,
+				    ac.invcode,
+				    ac.invtype,
+				    ac.invname,
+				    ac.forinvname,
+				    ac.invspec,
+				    aF.MEASNAME,
+				    aa.nnumber,
+				    aa.noriginalcurtaxprice,
+				    aa.noriginalcursummny,
+				    aa.ntaxrate,
+				    ad.vdef4 as advdef4,
+				    aa.dconsigndate,
+				    aa.frownote,
+				    ad.ntotalreceivenumber,
+				    ad.ntotalinventorynumber,
+				    ad.ntotalinvoicenumber,
+				    a.dapprovedate,
+				    ad.bsquareendflag
+			    FROM so_sale a
+			        LEFT JOIN bd_psndoc b ON a.cemployeeid = B.pk_psndoc
+			        LEFT JOIN bd_psnbasdoc bb on b.pk_psnbasdoc=bb.pk_psnbasdoc
+			        LEFT JOIN sm_user c ON a.coperatorid = c.CUSERID
+			        LEFT JOIN bd_cumandoc d ON a.ccustomerid = d.pk_cumandoc
+			        LEFT JOIN bd_cubasdoc dd ON d.pk_cubasdoc = dd.pk_cubasdoc
+			        LEFT JOIN bd_corp e ON a.pk_corp = e.pk_corp
+			        LEFT JOIN bd_payterm f ON a.ctermprotocolid = f.pk_payterm
+			        JOIN so_saleorder_b aa ON aa.csaleid = a.csaleid
+			        JOIN bd_invbasdoc ac ON aa.cinvbasdocid = ac.pk_invbasdoc
+			        JOIN so_saleexecute ad ON aa.corder_bid = ad.csale_bid
+			        JOIN bd_currtype ae ON aa.ccurrencytypeid = ae.pk_currtype
+			        JOIN bd_measdoc af ON ac.pk_measdoc = af.pk_measdoc
+			    WHERE     
+			    	a.dr = 0
+			        AND (a.pk_corp = '1002' or a.pk_corp = '1003')
+			        and a.cbiztype='0001A11000000000R4GJ'
+			        ORDER BY a.dmakedate
+			) a1
+			LEFT JOIN
+				(  
+					SELECT 
+			             aa.csourcerowid AS b1,
+			             aa.corder_bid as corder_bid,
+			             dd.CUSTSHORTNAME as factShortName,
+			             dd.engname as factEngName,
+			             a.vordercode as contractNo,
+			             a.dorderdate,
+			             a.cdeliveraddress,
+			             b.psnname as cgpsnname,
+			             c.USER_NAME as cgUsername,
+			             f.termname,
+			             a.nprepaymny,
+			             a.vmemo as cgvmemo,
+			             a.forderstatus as cgforderstatus,
+			             ae.currtypename as cgCurrtypeName,
+			             aF.MEASNAME as cgMeasName,
+			             aa.nordernum as cgNorderNum,
+			             aa.norgtaxprice as cgNorgTaxPrice,
+			             aa.noriginaltaxpricemny as cgnoriginaltaxpricemny,
+			             aa.ntaxrate as cgntaxrate,
+			             aa.dplanarrvdate as cgdplanarrvdate,
+			             aa.vmemo as cgaavmemo,
+			             aa.naccumarrvnum,
+			             aa.naccumstorenum,
+			             aa.naccuminvoicenum
+			        FROM 
+			        	po_order a
+			            LEFT JOIN bd_psndoc b ON a.cemployeeid = B.pk_psndoc
+			            LEFT JOIN sm_user c ON a.coperator = c.CUSERID
+			            LEFT JOIN bd_cumandoc d ON a.cvendormangid = d.pk_cumandoc
+			            LEFT JOIN bd_cubasdoc dd ON d.pk_cubasdoc = dd.pk_cubasdoc
+			            LEFT JOIN bd_corp e ON a.pk_corp = e.pk_corp
+			            LEFT JOIN bd_payterm f ON a.ctermprotocolid = f.pk_payterm
+			            JOIN po_order_b aa ON aa.corderid = a.corderid
+			            JOIN bd_invbasdoc ac ON aa.cbaseid = ac.pk_invbasdoc
+			            JOIN bd_currtype ae ON aa.ccurrencytypeid = ae.pk_currtype
+			            JOIN bd_measdoc af ON ac.pk_measdoc = af.pk_measdoc
+			        WHERE 
+			        	a.dr = 0 and a.bislatest='Y'
+			           	AND (a.pk_corp = '1002' or a.pk_corp = '1003')
+			           	and a.cbiztype='0001A11000000000R4GJ'
+			        ORDER BY 
+			        	a.dorderdate DESC
+			    ) b1
+			ON a1.a1 = b1.b1
+			left join 
+				(
+					select 
+					 b.corder_bid,
+					 max(c.user_name) as dhusername,
+					 max(a.dreceivedate) as dreceivedate,
+					 sum(narrvnum) as narrvnum
+					from 
+						po_arriveorder a
+						join 
+							po_arriveorder_b b 
+								on a.carriveorderid= b.carriveorderid
+						LEFT JOIN 
+							sm_user c 
+								ON a.coperator = c.CUSERID
+					group by 
+					b.corder_bid
+			    ) c1 
+			    	on b1.corder_bid=c1.corder_bid
+			left join 
+				(
+			    	select 
+			            cfirstbillbid as cfirstbillbid,
+			            'Pass' as qcResult,
+			            max(a.dbilldate) as rkBillDate,
+			            max(c.user_name) as rkUserName,
+			            sum(ninnum) as ninnum
+			        from 
+			        	ic_general_h a
+			            join 
+			            	ic_general_b b 
+			            		on a.cgeneralhid =b.cgeneralhid 
+			            LEFT JOIN 
+			            	sm_user c 
+			            		ON a.coperatorid = c.CUSERID
+			            group by cfirstbillbid
+			    ) d1 
+			    	on b1.corder_bid=d1.cfirstbillbid
+		where 
+			1=1 
+			and instr( vdef1 , 'PR-RTX-' ) = 0
+            and instr( vdef1 , '-RGA' ) = 0
+            and instr( vdef1 , 'KS' ) = 0
+            and instr( vreceiptcode, 'KS' ) = 0
+            and instr( vdef1, 'Warranty') = 0
+			and ((nnumber-NVL(ntotalinvoicenumber,0)&gt;0) or (nnumber-NVL(naccuminvoicenum,0)&gt;0))
+		order by vreceiptcode desc
+    </select>
+</mapper>  

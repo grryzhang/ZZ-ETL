@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zhongzhou.Excavator.DAO.MSSQL.FUTONG.FreightDAO">  
+	
+	<resultMap type="com.zhongzhou.Excavator.model.FUTONG.report.FreightInfo" id="freightInfoMap">
+		<result property="contractNo"                  	  column="contractNo"	  />
+		<result property="custContractNo"                 column="custContractNo" />
+		<result property="goodsCode"                  	  column="goodsCode"	  />
+		<result property="custGoodsCode"                  column="custGoodsCode"  />
+		<result property="invoiceNumber"                  column="invoiceNo"	  />
+		<result property="invoiceDate"                    column="invoiceDate"	  />
+		<result property="estimatedTimeofDelivery"   	  column="etd"         	  />
+		<result property="estimatedTimeOfArrival"         column="eta"      	  />
+		<result property="receiptDate"         			  column="receiptDate"    />
+		<result property="customerContractNumber"    	  column="custContractNo" />
+		<result property="mbl"                  	      column="mbl"   	      />
+		<result property="container"                  	  column="container"   	  />
+		<result property="startPlace"                  	  column="startPlace"     />
+		<result property="endPlace"  	            	  column="endPlace"       />
+		<result property="transportMode"                  column="transMode"      />
+		<result property="totalBulk"                  	  column="totalbulk"      />
+    </resultMap>  
+    
+    <select id="selectFreightInfo"    
+    		parameterType="com.zhongzhou.Excavator.model.FUTONG.report.FreightInfoSearchParameter" 
+    		resultMap="freightInfoMap">
+
+    	select
+			a.invoiceNo as invoiceNo,
+			CONVERT(varchar(100), a.invoiceDate, 23) as invoiceDate,
+			a1.shortname as custShortName,
+			d.[其它.客户采购员] as custBuyer,
+			CONVERT(varchar(100), b.etd, 23) as etd,
+			CONVERT(varchar(100), b.eta, 23) as eta,
+			CONVERT(varchar(100), b.GetDates, 23) as receiptDate,
+			e.dictvalue as priceTerm,
+			CASE WHEN e.dictvalue ='DDP' THEN CONVERT(varchar(100), b.eta+2, 23) ELSE NULL END as etaCustStock,
+			b.getno as mbl,
+			d.[其它.箱号] as container,
+			b.startPlace as startPlace,
+			b.endPlace as endPlace,
+			b.transMode as transMode,
+			d.[其它.销售合同号] as contractNo,
+			d.[其它.客户合同号] as custContractNo,
+			c.goodsCode as goodsCode,
+			c.custGoodsCode as custGoodsCode,
+			sum(c.totalbulk) as totalbulk,
+			'100%TT  against copy of the B/L.' as paymentTerm
+		from 
+			bill_exchange_info a
+			
+			join 
+				cust_info a1 
+					on a.custid=a1.id
+			join 
+				bill_settlement_info b 
+					on a.id=b.settleid
+			join 
+				bill_exchange_product_info c 
+					on c.billid=a.id
+			join 
+				bill_exchange_product_property d 
+					on c.billproductid=d.mainid
+			left join  
+				Dict_Normal e 
+					on e. dictType =6 and a.priceTerm = e.dictKey
+		where 
+			1=1 
+			and a.status=0 
+			and c.status=0
+
+	 		<if test = "contractNumbers != null and contractNumbers.size() &gt; 0 ">
+	            and d.[其它.销售合同号] in
+	            <foreach item="item" index="index" collection="contractNumbers" open="(" separator="," close=")">  
+	           		#{item}  
+	            </foreach>
+	        </if>
+		group by
+			a.invoiceNo ,
+			a.invoiceDate ,
+			a1.shortname ,
+			d.[其它.客户采购员] ,
+			b.etd ,
+			b.eta ,
+			b.GetDates,
+			e.dictvalue ,
+			CASE WHEN e.dictvalue ='DDP' THEN CONVERT(varchar(100), b.eta+2, 23) ELSE NULL END,
+			b.getno,
+			d.[其它.箱号] ,
+			b.startPlace ,
+			b.endPlace ,
+			b.transMode ,
+			d.[其它.销售合同号] ,
+			d.[其它.客户合同号] ,
+			c.goodsCode ,
+			c.custGoodsCode;
+    </select> 
+    
+</mapper>  

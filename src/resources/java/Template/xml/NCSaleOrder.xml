@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<ufinterface account="1" billtype="30" filename="" isexchange="Y" proc="add" receiver="101" replace="Y" roottag="" sender="zherp" subbilltype="">
+    <so_order id="">
+        <so_order_head>
+            <pk_corp></pk_corp>    <!--manul 订单owner company -->
+            <vreceiptcode></vreceiptcode>   <!--manul 要和业务员确认逻辑-->
+            <creceipttype></creceipttype> <!--manul 单据类型-模板ID 固定，找唐明确认-->
+            <cbiztype></cbiztype><!--manul 所属业务流程，固定，找唐明确认 -->
+            <editionnum></editionnum>
+            <vaccountyear></vaccountyear>
+            <binitflag>N</binitflag>
+            <dbilldate></dbilldate><!--manul 生成日期-->
+            <ccustomerid></ccustomerid> <!--manul 必须是公司全称，销售对象公司的名称-->
+            <cdeptid></cdeptid><!--manul 部门ID 固定，找唐明确认是什么值-->
+            <cemployeeid></cemployeeid>  <!--manul 必须是业务员名字 -->
+            <coperatorid></coperatorid> <!--manul 必须是业务员名字 -->
+            <ctermprotocolid></ctermprotocolid>  <!--manul 业务必填，业务需要，接口非必填。导入成功后，交由业务员自己补上 -->
+            <csalecorpid></csalecorpid><!--manul 固定，找唐明确认是什么值-->
+            <ccalbodyid></ccalbodyid><!--manul 固定为1 ，confirmed -->
+            <creceiptcustomerid></creceiptcustomerid><!--manul 必须是公司全称-->
+            <vreceiveaddress></vreceiveaddress>
+            <creceiptareaid></creceiptareaid>
+            <creceiptcorpid></creceiptcorpid> <!--manul 必须是公司全称 业务上应该是什么？-->
+            <ccustbankid></ccustbankid>
+            <ctransmodeid></ctransmodeid>
+            <ndiscountrate></ndiscountrate> <!--manul 默认100, confirmed -->
+            <cwarehouseid></cwarehouseid>
+            <veditreason></veditreason>
+            <bfreecustflag>N</bfreecustflag>
+            <cfreecustid></cfreecustid>
+            <ibalanceflag>0</ibalanceflag>
+            <nsubscription>0.00000000</nsubscription>
+            <nevaluatecarriage>0.00000000</nevaluatecarriage>
+            <dmakedate></dmakedate> <!--manul 制单日期 -->
+            <capproveid></capproveid>
+            <dapprovedate></dapprovedate>
+            <fstatus>1</fstatus>
+            <vnote></vnote>
+            <vdef1></vdef1> <!--manul 对方单据号 -->
+            <vdef2></vdef2>
+            <vdef3></vdef3>
+            <vdef4></vdef4><!--manul 最迟交货日期 ， 业务需要，接口非必填。导入成功后，交由业务员自己补上 -->
+            <vdef5></vdef5>
+            <vdef6></vdef6>
+            <vdef7></vdef7><!--manul 专业术语 vdef7 必填， for example  F.O.B.-->
+            <vdef8></vdef8>
+            <vdef9></vdef9>
+            <vdef10></vdef10>
+            <vdef11></vdef11>
+            <vdef12></vdef12>
+            <vdef13></vdef13>
+            <vdef14></vdef14>
+            <vdef15></vdef15>
+            <vdef16></vdef16>
+            <vdef17></vdef17>
+            <vdef18></vdef18>
+            <vdef19></vdef19>
+            <vdef20></vdef20>
+            <pk_defdoc1></pk_defdoc1>
+            <pk_defdoc2></pk_defdoc2>
+            <pk_defdoc3></pk_defdoc3>
+            <pk_defdoc4></pk_defdoc4>
+            <pk_defdoc5></pk_defdoc5>
+            <pk_defdoc6></pk_defdoc6>
+            <pk_defdoc7></pk_defdoc7>
+            <pk_defdoc8></pk_defdoc8>
+            <pk_defdoc9></pk_defdoc9>
+            <pk_defdoc10></pk_defdoc10>
+            <pk_defdoc11></pk_defdoc11>
+            <pk_defdoc12></pk_defdoc12>
+            <pk_defdoc13></pk_defdoc13>
+            <pk_defdoc14></pk_defdoc14>
+            <pk_defdoc15></pk_defdoc15>
+            <pk_defdoc16></pk_defdoc16>
+            <pk_defdoc17></pk_defdoc17>
+            <pk_defdoc18></pk_defdoc18>
+            <pk_defdoc19></pk_defdoc19>
+            <pk_defdoc20></pk_defdoc20>
+            <bretinvflag>N</bretinvflag>
+            <boutendflag>N</boutendflag>
+            <binvoicendflag>N</binvoicendflag>
+            <breceiptendflag>N</breceiptendflag>
+            <bpayendflag>N</bpayendflag>
+        </so_order_head>
+        <so_order_body>
+            <entry>
+                <pk_corp></pk_corp>  <!--manul 订单owner company ,应该和head 一样 -->
+                <creceipttype></creceipttype>
+                <csourcebillid></csourcebillid>
+                <csourcebillbodyid></csourcebillbodyid>
+                <cinvbasdocid></cinvbasdocid>
+                <cinventoryid></cinventoryid>    <!--manul 商品编号，NC中获取，或是NC中必须有对应的数据 -->
+                <cunitid></cunitid>       <!--manul 数据库内的商品单位编码 -->
+                <cpackunitid></cpackunitid>
+                <cbatchid></cbatchid>
+                <npacknumber></npacknumber>
+                <cconsigncorpid></cconsigncorpid>
+                <cadvisecalbodyid></cadvisecalbodyid>   <!-- manual 发货库存组织, NC里面固定就这么一个 confirmed -->
+                <cbodywarehouseid></cbodywarehouseid>
+                <creccalbodyid></creccalbodyid>
+                <crecwarehouseid></crecwarehouseid>
+                <dconsigndate></dconsigndate>  <!--manul 发货日期  业务上如何确定？？？-->
+                <ddeliverdate></ddeliverdate> <!--manul 交货日期  业务上如何确定？？？-->
+                <blargessflag>N</blargessflag>
+                <ceditsaleid></ceditsaleid>
+                <beditflag>N</beditflag>
+                <veditreason></veditreason>
+                <ccurrencytypeid></ccurrencytypeid>   <!-- manual -->
+                <nitemdiscountrate></nitemdiscountrate>  <!-- manual 固定，单品折扣，以后业务有问题再说-->
+                <ndiscountrate></ndiscountrate> <!-- manual 固定，整单折扣，confirmed -->
+                <nexchangeotobrate></nexchangeotobrate>  <!-- manual 折本汇率，业务上如何确定？？？-->
+                <nexchangeotoarate></nexchangeotoarate>
+                <ntaxrate>0</ntaxrate>
+                <noriginalcurprice></noriginalcurprice> <!-- manual 原币无税单价 从NC的哪里面查？销售价格？-->
+                <noriginalcurtaxprice></noriginalcurtaxprice> <!-- manual -->
+				<nnumber></nnumber><!-- manual -->
+                <noriginalcurnetprice></noriginalcurnetprice> <!-- manual 原币无税净价 从NC的哪里面查？销售价格？-->
+                <noriginalcurtaxnetprice></noriginalcurtaxnetprice> <!-- manual 原币无税净价 从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <noriginalcurtaxmny></noriginalcurtaxmny> <!-- manual 一定有值,原币税额 ，从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <noriginalcurmny></noriginalcurmny>  <!-- manual   一定有值,原币无税金额, 从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <noriginalcursummny></noriginalcursummny> <!-- manual 必须为 noriginalcurtaxmny + noriginalcurmny -->
+                <noriginalcurdiscountmny></noriginalcurdiscountmny> <!-- manual  原币折扣额 , 大部分数据是0 ，稍后和业务确认-->
+                <nprice></nprice> <!-- manual  本币无税单价,   ?稍后和业务确认-->
+                <ntaxprice></ntaxprice>  <!-- manual  本币含税单价,   ?稍后和业务确认-->
+                <nnetprice></nnetprice> <!-- manual  本币无税净价,   ?稍后和业务确认-->
+                <ntaxnetprice></ntaxnetprice> <!-- manual  本币含税净价,   ?稍后和业务确认-->
+                <ntaxmny></ntaxmny> <!-- manual  本币税额净价,   ?稍后和业务确认 从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <nmny></nmny> <!-- manual 本币无税金额 ?稍后和业务确认 从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <nsummny></nsummny>  <!-- manual 必须是 ntaxmny + nmny .本币价税合计 ?稍后和业务确认 从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <ndiscountmny></ndiscountmny>  <!-- manual 本币折扣额 ?稍后和业务确认 从哪里来的 ？ 是否需要。如果NC没有自动计算，我们如何计算-->
+                <coperatorid></coperatorid> <!-- 操作人，必须是人名 -->
+                <frowstatus>0</frowstatus>
+                <frownote></frownote>
+                <fbatchstatus>0</fbatchstatus>
+                <ct_manageid></ct_manageid>
+                <cfactoryid></cfactoryid>
+                <cfreezeid></cfreezeid>
+                <cbomorderid></cbomorderid>
+                <boosflag>N</boosflag>
+                <bsupplyflag>N</bsupplyflag>
+                <creceiptareaid></creceiptareaid>
+                <vreceiveaddress></vreceiveaddress>
+                <creceiptcorpid></creceiptcorpid> <!-- 收货公司，必须是NC中的全名 -->
+                <crowno></crowno> <!-- manual 只做排序用， 行号乘以10， 第一条数据就是10，第二条是 20 ， 一次类推  confirmed -->
+                <ntotalpaymny>0.00000000</ntotalpaymny>
+                <ntotalreceiptnumber>0.00000000</ntotalreceiptnumber>
+                <ntotalinvoicenumber>0.00000000</ntotalinvoicenumber>
+                <ntotalinvoicemny>0.00000000</ntotalinvoicemny>
+                <ntotalinventorynumber>0.00000000</ntotalinventorynumber>
+                <ntotalbalancenumber>0.00000000</ntotalbalancenumber>
+                <ntotalsignnumber>0.00000000</ntotalsignnumber>
+                <ntotalcostmny>0.00000000</ntotalcostmny>
+                <bifinvoicefinish>N</bifinvoicefinish>
+                <bifreceiptfinish>N</bifreceiptfinish>
+                <bifinventoryfinish>N</bifinventoryfinish>
+                <bifpayfinish>N</bifpayfinish>
+                <bifpaybalance>N</bifpaybalance>
+                <bifpaysign>N</bifpaysign>
+                <nassistcurdiscountmny>0.00000000</nassistcurdiscountmny>
+                <nassistcursummny>0.00000000</nassistcursummny>
+                <nassistcurmny>0.00000000</nassistcurmny>
+                <nassistcurtaxmny>0.00000000</nassistcurtaxmny>
+                <nassistcurtaxnetprice>0.00000000</nassistcurtaxnetprice>
+                <nassistcurnetprice>0.00000000</nassistcurnetprice>
+                <nassistcurtaxprice>0.00000000</nassistcurtaxprice>
+                <nassistcurprice>0.00000000</nassistcurprice>
+                <cprojectid></cprojectid>
+                <cprojectphaseid></cprojectphaseid>
+                <vfree1></vfree1>
+                <vfree2></vfree2>
+                <vfree3></vfree3>
+                <vfree4></vfree4>
+                <vfree5></vfree5>
+                <vdef1></vdef1>
+                <vdef2></vdef2>
+                <vdef3></vdef3>
+                <vdef4></vdef4>
+                <vdef5></vdef5>
+                <vdef6></vdef6>
+                <vdef7></vdef7>
+                <vdef8></vdef8>
+                <vdef9></vdef9>
+                <vdef10></vdef10>
+                <vdef11></vdef11>
+                <vdef12></vdef12>
+                <vdef13></vdef13>
+                <vdef14></vdef14>
+                <vdef15></vdef15>
+                <vdef16></vdef16>
+                <vdef17></vdef17>
+                <vdef18></vdef18>
+                <vdef19></vdef19>
+                <vdef20></vdef20>
+                <pk_defdoc1></pk_defdoc1>
+                <pk_defdoc2></pk_defdoc2>
+                <pk_defdoc3></pk_defdoc3>
+                <pk_defdoc4></pk_defdoc4>
+                <pk_defdoc5></pk_defdoc5>
+                <pk_defdoc6></pk_defdoc6>
+                <pk_defdoc7></pk_defdoc7>
+                <pk_defdoc8></pk_defdoc8>
+                <pk_defdoc9></pk_defdoc9>
+                <pk_defdoc10></pk_defdoc10>
+                <pk_defdoc11></pk_defdoc11>
+                <pk_defdoc12></pk_defdoc12>
+                <pk_defdoc13></pk_defdoc13>
+                <pk_defdoc14></pk_defdoc14>
+                <pk_defdoc15></pk_defdoc15>
+                <pk_defdoc16></pk_defdoc16>
+                <pk_defdoc17></pk_defdoc17>
+                <pk_defdoc18></pk_defdoc18>
+                <pk_defdoc19></pk_defdoc19>
+                <pk_defdoc20></pk_defdoc20>
+                <ntotalreturnnumber>0.00000000</ntotalreturnnumber>
+                <ntotalcarrynumber>0.00000000</ntotalcarrynumber>
+                <ntotalplanreceiptnumber>0.00000000</ntotalplanreceiptnumber>
+            </entry>
+        </so_order_body>
+    </so_order>
+</ufinterface>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<!-- Used for parse xhtml from www.baojia.steelcn.cn -->
+<xsl:template match="/">
+	
+	<prices>
+    <xsl:for-each select="//table">
+    	<!--
+    	<price>
+    		<itemName>	
+      		<xsl:value-of select="normalize-space( tbody/tr/td[1 and @rowspan='2'] )"/>
+    		</itemName>
+    	</price>
+    	-->
+    	<xsl:for-each select="tbody/tr[1]">
+			<xsl:variable name="itemName" select="normalize-space( td[1 and @rowspan='2'] )"></xsl:variable>
+			<xsl:variable name="date" select="input[1]/@value"></xsl:variable>
+			<xsl:for-each select="td/a[@target='_blank']">
+				<price>
+					<xsl:variable name="position" select="position()"></xsl:variable>
+					<xsl:variable name="location" select="//table/thead/tr/th[$position+2]/a[@target='_blank']"></xsl:variable>
+					<itemName>
+						<xsl:value-of select="$itemName"/>
+					</itemName>
+					<date>
+						<xsl:value-of select= "$date"/>
+					</date>
+					<location><xsl:value-of select="normalize-space( $location )"/></location>
+					<priceNumber>
+						<xsl:value-of select="normalize-space()"/>
+					</priceNumber>
+				</price>
+			</xsl:for-each>
+    	</xsl:for-each>
+    </xsl:for-each>
+	</prices>
+</xsl:template>
+
+</xsl:stylesheet>
